@@ -1,0 +1,54 @@
+<div class="card-content places">
+  <div>
+    <div class="title-header">
+      <span>QUẢN LÍ BACKEND</span>
+    </div>
+    <div class="input-container">
+      <span>Tên Backend:</span>
+      <input
+        class="custom-input"
+        nbInput
+        fieldSize="small"
+        status="basic"
+        type="text"
+        placeholder="Tìm theo tên backend..."
+        (keydown.enter)="onSearch($event)"
+      />
+    </div>
+  </div>
+  <!-- <div class="ag-grid-wrapper">
+    <ag-grid-angular
+      class="ag-theme-material wrapper"
+      [columnDefs]="columnHeader"
+      [rowData]="rowData"
+      (gridReady)="gridReady($event)"
+    >
+    </ag-grid-angular>
+  </div> -->
+  <ag-grid-template
+    [columnHeader]="columnHeader"
+    [rowData]="rowData"
+    [perPage]="perPage"
+    [totalRow]="totalRow"
+    [refeshPage]="refeshPage"
+    (changePage)="onChangePage($event)"
+    (selectedItem)="onChangeSelectedItem($event)"
+  ></ag-grid-template>
+  <div class="d-flex justify-content-start button-wrapper">
+    <div class="button-container">
+      <button
+        nbButton
+        size="small"
+        status="primary"
+        (click)="onAddNewDataSetTap()"
+      >
+        THÊM
+      </button>
+    </div>
+    <div *ngIf="selected" class="button-container">
+      <button nbButton size="small" status="info">
+        CHI TIẾT
+      </button>
+    </div>
+  </div>
+</div>

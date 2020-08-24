@@ -1,0 +1,657 @@
+{
+-components: [
+- {
+autofocus: false,
+input: true,
+tableView: true,
+inputType: "text",
+inputMask: "",
+label: "Backend Name",
+key: "undefinedBackendName",
+placeholder: "",
+prefix: "",
+suffix: "",
+multiple: false,
+defaultValue: "",
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+spellcheck: true,
+-validate: {
+required: false,
+minLength: "",
+maxLength: "",
+pattern: "",
+custom: "",
+customPrivate: false
+},
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+type: "textfield",
+$$hashKey: "object:5078",
+labelPosition: "top",
+inputFormat: "plain",
+-tags: [
+],
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+label: "On server",
+key: "undefinedOnserver",
+placeholder: "",
+-data: {
+-values: [
+- {
+value: "ha1",
+label: "HA 1",
+$$hashKey: "object:9502"
+},
+- {
+value: "ha2",
+label: "HA 2",
+$$hashKey: "object:9519"
+},
+- {
+value: "ha3",
+label: "HA 3",
+$$hashKey: "object:9524"
+}
+],
+json: "",
+url: "",
+resource: "",
+custom: ""
+},
+dataSrc: "values",
+valueProperty: "",
+defaultValue: "",
+refreshOn: "",
+filter: "",
+authenticate: false,
+template: "<span>{{ item.label }}</span>",
+multiple: false,
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false
+},
+type: "select",
+$$hashKey: "object:9302",
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+label: "Balance",
+key: "undefinedBalance",
+placeholder: "",
+-data: {
+-values: [
+- {
+value: "roundrobin",
+label: "Roundrobin",
+$$hashKey: "object:9972"
+},
+- {
+value: "leastconn",
+label: "leastconn",
+$$hashKey: "object:9981"
+},
+- {
+value: "source",
+label: "source",
+$$hashKey: "object:9986"
+}
+],
+json: "",
+url: "",
+resource: "",
+custom: ""
+},
+dataSrc: "values",
+valueProperty: "",
+defaultValue: "",
+refreshOn: "",
+filter: "",
+authenticate: false,
+template: "<span>{{ item.label }}</span>",
+multiple: false,
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false
+},
+type: "select",
+$$hashKey: "object:9760",
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+inputType: "number",
+label: "Timeout server(m)",
+key: "undefinedTimeoutserverms",
+placeholder: "",
+prefix: "",
+suffix: "",
+defaultValue: "",
+protected: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false,
+min: "",
+max: "",
+step: "any",
+integer: "",
+multiple: "",
+custom: ""
+},
+type: "number",
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+},
+labelWidth: 17,
+labelMargin: 2,
+$$hashKey: "object:6788"
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+label: "Mode:",
+key: "undefinedMode",
+placeholder: "",
+-data: {
+-values: [
+- {
+value: "http",
+label: "HTTP",
+$$hashKey: "object:7044"
+},
+- {
+value: "tcp",
+label: "TCP",
+$$hashKey: "object:7081"
+},
+- {
+value: "health",
+label: "Health",
+$$hashKey: "object:7086"
+}
+],
+json: "",
+url: "",
+resource: "",
+custom: ""
+},
+dataSrc: "values",
+valueProperty: "",
+defaultValue: "",
+refreshOn: "",
+filter: "",
+authenticate: false,
+template: "<span>{{ item.label }}</span>",
+multiple: false,
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false
+},
+type: "select",
+$$hashKey: "object:6949",
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tree: true,
+-components: [
+- {
+autofocus: false,
+input: true,
+tableView: true,
+label: "Rules",
+key: "undefinedHttPoptionsRules",
+placeholder: "",
+-data: {
+-values: [
+- {
+value: "httpRequestSetHeader",
+label: "http request set header",
+$$hashKey: "object:7404"
+},
+- {
+value: "httpResponeSetHeader",
+label: "http respone set header",
+$$hashKey: "object:7467"
+},
+- {
+value: "httpRequestAddHeader",
+label: "http request add header",
+$$hashKey: "object:7472"
+},
+- {
+value: "httpResponeAddHeader",
+label: "http respone add header",
+$$hashKey: "object:7477"
+},
+- {
+value: "redirect",
+label: "redirect",
+$$hashKey: "object:8141"
+}
+],
+json: "",
+url: "",
+resource: "",
+custom: ""
+},
+dataSrc: "values",
+valueProperty: "",
+defaultValue: "",
+refreshOn: "",
+filter: "",
+authenticate: false,
+template: "<span>{{ item.label }}</span>",
+multiple: false,
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false
+},
+type: "select",
+$$hashKey: "object:7310",
+inDataGrid: true,
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+inputType: "text",
+inputMask: "",
+label: "value",
+key: "undefinedHttPoptionsValue",
+placeholder: "",
+prefix: "",
+suffix: "",
+multiple: false,
+defaultValue: "",
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+spellcheck: true,
+-validate: {
+required: false,
+minLength: "",
+maxLength: "",
+pattern: "",
+custom: "",
+customPrivate: false
+},
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+type: "textfield",
+$$hashKey: "object:7791",
+inDataGrid: true,
+labelPosition: "top",
+inputFormat: "plain",
+-tags: [
+],
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+label: "conditions",
+key: "undefinedHttPoptionsConditions",
+placeholder: "",
+-data: {
+-values: [
+- {
+value: "alwayt",
+label: "alwayt",
+$$hashKey: "object:8407"
+},
+- {
+value: "if",
+label: "if",
+$$hashKey: "object:8412"
+},
+- {
+value: "unless",
+label: "unless",
+$$hashKey: "object:8417"
+}
+],
+json: "",
+url: "",
+resource: "",
+custom: ""
+},
+dataSrc: "values",
+valueProperty: "",
+defaultValue: "",
+refreshOn: "",
+filter: "",
+authenticate: false,
+template: "<span>{{ item.label }}</span>",
+multiple: false,
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false
+},
+type: "select",
+$$hashKey: "object:8230",
+inDataGrid: true,
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+label: "ACL",
+key: "undefinedHttPoptionsAcl",
+placeholder: "",
+-data: {
+-values: [
+- {
+value: "exitHost",
+label: "exit host",
+$$hashKey: "object:8622"
+},
+- {
+value: "protoExit",
+label: "proto exit",
+$$hashKey: "object:9034"
+},
+- {
+value: "exitHehe",
+label: "exit hehe",
+$$hashKey: "object:9041"
+}
+],
+json: "",
+url: "",
+resource: "",
+custom: ""
+},
+dataSrc: "values",
+valueProperty: "",
+defaultValue: "",
+refreshOn: "",
+filter: "",
+authenticate: false,
+template: "<span>{{ item.label }}</span>",
+multiple: false,
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+-validate: {
+required: false
+},
+type: "select",
+$$hashKey: "object:8525",
+inDataGrid: true,
+labelPosition: "top",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+}
+],
+tableView: true,
+label: "HTTP options",
+key: "undefinedHttPoptions",
+protected: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+type: "datagrid",
+addAnotherPosition: "top",
+$$hashKey: "object:7142",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tree: true,
+-components: [
+- {
+autofocus: false,
+input: true,
+tableView: true,
+inputType: "text",
+inputMask: "",
+label: "Name",
+key: "undefinedServersName",
+placeholder: "",
+prefix: "",
+suffix: "",
+multiple: false,
+defaultValue: "",
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+spellcheck: true,
+-validate: {
+required: false,
+minLength: "",
+maxLength: "",
+pattern: "",
+custom: "",
+customPrivate: false
+},
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+type: "textfield",
+$$hashKey: "object:10473",
+inDataGrid: true,
+labelPosition: "top",
+inputFormat: "plain",
+-tags: [
+],
+-properties: {
+}
+},
+- {
+autofocus: false,
+input: true,
+tableView: true,
+inputType: "text",
+inputMask: "",
+label: "ip:port",
+key: "undefinedServersIpport",
+placeholder: "",
+prefix: "",
+suffix: "",
+multiple: false,
+defaultValue: "",
+protected: false,
+unique: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+spellcheck: true,
+-validate: {
+required: false,
+minLength: "",
+maxLength: "",
+pattern: "",
+custom: "",
+customPrivate: false
+},
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+type: "textfield",
+$$hashKey: "object:10861",
+inDataGrid: true,
+labelPosition: "top",
+inputFormat: "plain",
+-tags: [
+],
+-properties: {
+}
+}
+],
+tableView: true,
+label: "Servers",
+key: "undefinedServers",
+protected: false,
+persistent: true,
+hidden: false,
+clearOnHide: true,
+type: "datagrid",
+addAnotherPosition: "top",
+$$hashKey: "object:10133",
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+},
+- {
+type: "button",
+theme: "primary",
+disableOnInvalid: true,
+action: "submit",
+block: false,
+rightIcon: "",
+leftIcon: "",
+size: "md",
+key: "submit",
+tableView: false,
+label: "Submit",
+input: true,
+$$hashKey: "object:22",
+autofocus: false,
+isNew: false,
+-tags: [
+],
+-conditional: {
+show: "",
+when: null,
+eq: ""
+},
+-properties: {
+}
+}
+],
+display: "form",
+page: 0
+}

@@ -1,0 +1,202 @@
+vcenter.dl.innoria.com dl_vcenter171
+esxi23.dl.innoria.com esxi23
+data.innoria.com nextcloud16
+gwdl.innoria.dev gwdl1
+gw.dl.innoria.com gwdl1
+bonfi.innoria.com odoo8_70
+jewelry.rebase.vn odoo12_71
+school.mojo.vn mojo42
+learn.mojo.vn mojo43
+meet.mojo.vn meet_mojo_228
+meet.innoria.com meet_mojo_228
+docs.innoria.com docs_mojo_228
+draw.innoria.com draw_mojo_228
+k8s-dl.innoria.com k8s_dl_dashboard
+vcdl.innoria.com vcdl10
+giaoduocpham.com odoo72
+fs-demo.rebase.vn odoo72
+giaquang.rebase.vn odoo72
+ikac.rebase.vn odoo72
+erp.aaucorp.vn odoo72
+teamcity.innoria.com teamcity57
+giaminh.rebase.vn odoo12_71
+sentry.innoria.com k8s_sentry_grafana
+as.rebase.vn odoo12_71
+marigot.rebase.vn odoo8_70
+rebase.vn odoo72
+aaucorp.rebase.vn odoo72
+gotamhiep.rebase.vn k8s_odoo_11_prod
+demo.rebase.vn odoo12_71
+
+dl-dev.innokafe.com k8s_odoo_11_dev
+sg-dev.innokafe.com k8s_odoo_11_dev
+trading-dev.innokafe.com k8s_odoo_11_dev
+12ht-dev.rebase.vn k8s_odoo_11_dev
+128pd-dev.innokafe.com k8s_odoo_11_dev
+273pct-dev.rebase.vn k8s_odoo_11_dev
+dila-dev.rebase.vn k8s_odoo_11_dev
+garedecafe-dev.rebase.vn k8s_odoo_11_dev
+giaohuongxanh-dev.rebase.vn k8s_odoo_11_dev
+greencoffee-dev.rebase.vn k8s_odoo_11_dev
+innokafe-dev.com k8s_odoo_11_dev
+innoria-dev.com k8s_odoo_11_dev
+inthepine-dev.innokafe.com k8s_odoo_11_dev
+inthepine-dev.rebase.vn k8s_odoo_11_dev
+lugiadl-dev.innokafe.com k8s_odoo_11_dev
+#mu.rebase.vn k8s_odoo_11_dev
+naucoffee-dev.rebase.vn k8s_odoo_11_dev
+phothung-dev.rebase.vn k8s_odoo_11_dev
+royvilla-dev.rebase.vn k8s_odoo_11_dev
+smartcare-dev.rebase.vn k8s_odoo_11_dev
+trongdat-dev.rebase.vn k8s_odoo_11_dev
+uat-dev.innokafe.com k8s_odoo_11_dev
+vtp-dev.rebase.vn k8s_odoo_11_dev
+wantacup-dev.rebase.vn k8s_odoo_11_dev
+asa-dev.rebase.vn k8s_odoo_11_dev
+demo_vietthaiphat-dev.rebase.vn k8s_odoo_11_dev
+demo_smartcare-dev.rebase.vn k8s_odoo_11_dev
+demo_toocha-dev.rebase.vn k8s_odoo_11_dev
+
+
+dl.innokafe.com k8s_odoo_11_prod
+lugiadl.innokafe.com k8s_odoo_11_prod
+giaohuongxanh.rebase.vn k8s_odoo_11_prod
+garedecafe.rebase.vn k8s_odoo_11_prod
+wantacup.rebase.vn k8s_odoo_11_prod
+uat.innokafe.com k8s_odoo_11_prod
+12ht.rebase.vn k8s_odoo_11_prod
+royvilla.rebase.vn k8s_odoo_11_prod
+greencoffee.rebase.vn k8s_odoo_11_prod
+273pct.rebase.vn k8s_odoo_11_prod
+naucoffee.rebase.vn k8s_odoo_11_prod
+dila.rebase.vn k8s_odoo_11_prod
+phothung.rebase.vn k8s_odoo_11_prod
+mu.rebase.vn k8s_odoo_11_prod
+smartcare.rebase.vn k8s_odoo_11_prod
+sg.innokafe.com k8s_odoo_11_prod
+128pd.innokafe.com k8s_odoo_11_prod
+trading.innokafe.com k8s_odoo_11_prod
+haibi.innokafe.com k8s_odoo_11_prod
+inthepine.innokafe.com k8s_odoo_11_prod
+inthepine.rebase.vn k8s_odoo_11_prod
+innokafe.com k8s_odoo_11_prod
+#demo_hrsotrans.rebase.vn k8s_odoo_11_prod
+demo_vietthaiphat.rebase.vn k8s_odoo_11_prod
+demo_smartcare.rebase.vn k8s_odoo_11_prod
+demo_toocha.rebase.vn k8s_odoo_11_prod
+trongdat.rebase.vn k8s_odoo_11_prod
+chipcoffee.rebase.vn k8s_odoo_11_prod
+cafetung.rebase.vn k8s_odoo_11_prod
+www.innoria.com k8s_odoo_11_prod
+innokafe31.innokafe.com k8s_odoo_11_prod
+kcafe.rebase.vn k8s_odoo_11_prod
+innopos-test.innokafe.com k8s_odoo_11_prod
+demo.innokafe.com k8s_odoo_11_prod
+
+dashboard.spiderium.com elt223
+id.innoria.com k8s_sso
+
+ai.spiderium.com ai_spiderium225
+mobifone-api.spiderium.com mobifone_api225
+mobifone.spiderium.com mobifone_rpa225
+aau-api.spiderium.com aau_api225
+rpa-center.spiderium.com rpa_center_225
+rpa-center-api.spiderium.com rpa_center_api_225
+translate.spiderium.com translate_58
+api-bot.spiderium.com api_bot_126
+
+mojo.vn k8s_mojo_hub_prod
+hub-dev.mojo.vn k8s_mojo_hub_dev
+gitlab.innoria.com gitlab230
+desk.mojo.vn k8s_mojo_desk_prod
+travian.mojo.vn k8s_mojo_travian_prod
+pay.mojo.vn k8s_service_bot_prod
+pay-dev.mojo.vn k8s_service_bot_dev
+finbox.mojo.vn wealth_bot
+
+mobile.spiderium.com mobile_123
+registry-ui.innoria.com registry_ui129
+registry.innoria.com registry129
+k8s.innoria.com k8s_dl_dev_dashboard
+spiderium.com odoo72
+locphat.rebase.vn odoo12_71
+
+drawio.mojo.vn k8s_drawio
+office.mojo.vn k8s_office
+magicut-api.innoria.com magicut-api
+vnpay.mojo.vn vn-pay-165
+cdn.innoria.com k8s_cdn
+board.spiderium.com k8s_board
+dashboard.innoria.com k8s_dashboard_innoria
+robot.rebase.vn robot124
+mojocut-api.mojo.vn mojo_cut227
+clinic-api.mojo.vn mojo_clinic_51_api
+clinic.mojo.vn mojo_clinic_51_web
+
+search.innoria.com k8s_elastic_search
+
+archive_demo.insilos.com silos
+archive_demo-api.insilos.com silos-api
+doc.insilos.com odoo72
+kbn.insilos.com elk90
+spider.insilos.com spider94
+portia.insilos.com portia93
+scrapy93.insilos.com scrapy93
+scrapy94.insilos.com scrapy94
+mail.insilos.com zimbra101
+app.insilos.com nextcloud17
+draw.insilos.com drawio
+flow.insilos.com flow110
+gen3.insilos.com gen3110
+hemp.insilos.com bell-energy110
+hemp-api.insilos.com bell-energy110_2337
+mobifone-api.insilos.com mobifone_api110
+mobifone.insilos.com mobifone110
+corona.insilos.com corona42
+corona-api.insilos.com corona_api42
+corona-flow.insilos.com corona_flow42
+insilos.com odoo72
+www.insilos.com odoo72
+we.innoria.com odoo72
+ocr.insilos.com ocr124
+ocr-api.insilos.com ocr_api124
+ocr-backend.insilos.com ocr_backend124
+
+test-sso.innoria.com test_sso_229_8080
+test.innoria.com test_innoria_58
+pm.innoria.com jira29
+
+fin-dev.mojo.vn k8s_mojo_finance_dev
+fin.mojo.vn k8s_mojo_finance_prod
+rpa-iot-dev-api.innoria.com k8s_rpa_iot_server_dev
+rpa-iot-api.innoria.com k8s_rpa_iot_server_prod
+i3-dev-api.innoria.com k8s_i3_server_dev
+i3-api.innoria.com k8s_i3_server_prod
+crawler.mojo.vn crawler_mojo_119
+
+i3-dev.innoria.com k8s_i3_web_dev
+i3.innoria.com k8s_i3_web_prod
+rpa-iot-dev.innoria.com k8s_rpa_iot_web_dev
+rpa-iot.innoria.com k8s_rpa_iot_web_prod
+
+fin-dev-api.mojo.vn k8s_finance_server_dev
+fin-api.mojo.vn k8s_finance_server_prod
+demogiaquang.rebase.vn odoo12_71
+
+analytics-dev.innoria.com k8s_mojo_analytics_dev
+analytics.innoria.com k8s_mojo_analytics_prod
+
+furniture.rebase.vn odoo72
+demoikac.rebase.vn odoo72
+
+notification-api-dev.spiderium.com k8s_rpa_skype_server_dev
+notification-api.spiderium.com k8s_rpa_skype_server_prod
+demoyakyo2.rebase.vn yakyo2_185
+notification-dashboard.spiderium.com notification-dashboard_126
+
+sleet.mojo.vn sleet_227
+sonar.innoria.com k8s_sonarqube_prod
+
+jelwerydl.rebase.vn odoo12_71
+
+demo1.rebase.vn odoo72

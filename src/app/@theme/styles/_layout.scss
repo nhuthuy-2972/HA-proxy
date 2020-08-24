@@ -1,0 +1,81 @@
+@mixin ngx-layout() {
+  @include media-breakpoint-down(is) {
+    .row {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}
+
+.card-content {
+  border: solid 1px #e1e1e1;
+  background: #ffffff;
+  padding: 15px 20px 20px;
+  border-radius: 5px;
+
+  .input-container {
+    display: flex;
+    padding: 10px 0px;
+    align-items: center;
+    .custom-input {
+      width: 20%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: flex;
+      margin: 0px 15px;
+    }
+  }
+
+  button {
+    height: 32px;
+    min-width: 85px;
+  }
+
+  formio {
+    .formio-form {
+      min-height: 20px !important;
+    }
+  }
+
+  .title-header {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Roboto;
+    text-align: center;
+  }
+
+  .ag-grid-wrapper {
+    .wrapper {
+      height: calc(100vh - 76px - 36px - 20px - 32px - 41px - 220px);
+      .ag-row {
+        cursor: pointer;
+      }
+      .ag-header {
+        background-color: #efefef;
+        .ag-header-cell-label {
+          font-family: "Roboto" !important;
+          font-weight: 700;
+          font-size: 13px;
+          color: #222b45;
+        }
+      }
+      .ag-loading-template {
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .button-wrapper {
+    padding-top: 15px;
+    .button-container {
+      padding-right: 15px;
+    }
+  }
+}
+
+.form-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,71 @@
+<div class="ag-grid-wrapper">
+  <ag-grid-angular
+    class="ag-theme-material wrapper"
+    [columnDefs]="columnHeader"
+    [rowData]="rowData"
+    [defaultColDef]="agConfig"
+    [overlayLoadingTemplate]="loadingTemplate"
+    [overlayNoRowsTemplate]="noRowsTemplate"
+    [rowSelection]="selectionType"
+    [frameworkComponents]="frameworkComponents"
+    (selectionChanged)="handleSelectionChanged()"
+    (gridReady)="agGridReady($event)"
+  >
+  </ag-grid-angular>
+  <div
+    style="
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-family: 'Roboto';
+    "
+  >
+    <!-- <div>
+      <span
+        >{{ totalRow > 0 ? page * perPage - perPage + 1 : 0 }} to
+        {{ page !== totalPage && totalRow > 0 ? perPage * page : totalRow }} of
+        {{ totalRow }}
+      </span>
+    </div> -->
+    <div>
+      <button
+        nbButton
+        ghost
+        size="small"
+        (click)="handleFirstPage()"
+        [disabled]="disabledPreviousPage"
+      >
+        <nb-icon icon="arrowhead-left-outline"></nb-icon>
+      </button>
+      <button
+        nbButton
+        ghost
+        size="small"
+        (click)="handlePreviousPage()"
+        [disabled]="disabledPreviousPage"
+      >
+        <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+      </button>
+      <span style="padding: 0px 5px;">Page {{ page }} of {{ totalPage }}</span>
+      <button
+        nbButton
+        ghost
+        size="small"
+        (click)="handleNextPage()"
+        [disabled]="disabledNextPage"
+      >
+        <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
+      </button>
+      <button
+        nbButton
+        ghost
+        size="small"
+        (click)="handleLastPage()"
+        [disabled]="disabledNextPage"
+      >
+        <nb-icon icon="arrowhead-right-outline"></nb-icon>
+      </button>
+    </div>
+  </div>
+</div>

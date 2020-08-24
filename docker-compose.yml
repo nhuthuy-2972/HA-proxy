@@ -1,0 +1,14 @@
+version: "2"
+services:
+  angkorwat:
+    container_name: angkorwat
+    build:
+      context: ./
+    volumes:
+      - ./log/:/var/log/
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - 88:80
+      - 4443:443
+    privileged: true
+    restart: always
