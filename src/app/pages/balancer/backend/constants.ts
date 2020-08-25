@@ -3,6 +3,7 @@ import {
   PARSE_REQUEST_HEADER,
 } from "../../../@share/constants";
 import { environment } from "../../../../environments/environment";
+import { parse } from "path";
 
 export const FORM_JSON_DEFAULT = {
   components: [
@@ -293,7 +294,7 @@ export const FORM_JSON_DEFAULT = {
       },
       dataSrc: "values",
       valueProperty: "",
-      defaultValue: "http",
+      defaultValue: "",
       refreshOn: "",
       filter: "",
       authenticate: false,
@@ -364,7 +365,7 @@ export const FORM_JSON_DEFAULT = {
           clearOnHide: true,
           bordered: false,
           validate: {
-            required: false,
+            required: true,
           },
           type: "select",
           labelPosition: "top",
@@ -940,23 +941,30 @@ export function getHearder(placeTypeName: string) {
   ];
 }
 
-export const BACKEND_FIELD_FORM = {
-  HA_SERVER: "haproxyId",
-  BACKEND_NAME: "backendName",
-  BALANCE: "balance",
-  TIMEOUT: "timeout",
-  TIMEOUT_UNIT: "unitTimeOut",
-  MODE: "mode",
-  OPTION_LIST: "optionList",
-  HTTP_LIST: "httpList",
-  SERVER_LIST: "serverList",
-};
+// export const BACKEND_FIELD_FORM = {
+//   HA_SERVER: "haproxyId",
+//   BACKEND_NAME: "backendName",
+//   BALANCE: "balance",
+//   TIMEOUT: "timeout",
+//   TIMEOUT_UNIT: "unitTimeOut",
+//   MODE: "mode",
+//   OPTION_LIST: "optionList",
+//   HTTP_LIST: "httpList",
+//   SERVER_LIST: "serverList",
+// };
 
 export function parseToForm(parseOj: any) {
   return {
+    objectId: parseOj.objectId,
     haproxyId: parseOj.serverHa.objectId || null,
     backendName: parseOj.name || null,
     balance: parseOj.balance || null,
-    timeout: parseOj.timeout,
+    mode: parseOj.mode || null,
+    timeout:
+      parseOj.timeout != undefined ? parseOj.timeout.value.split(" ")[1] : null,
+    unitTimeOut: parseOj.timeout != undefined ? parseOj.timeout.unit : "m",
+    optionList: parseOj.option,
+    httpList: parseOj.httpRequest,
+    serverList: parseOj.server,
   };
 }

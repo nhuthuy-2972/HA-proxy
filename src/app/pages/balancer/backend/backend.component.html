@@ -46,8 +46,13 @@
       </button>
     </div>
     <div *ngIf="selected" class="button-container">
-      <button nbButton size="small" status="info">
-        CHI TIẾT
+      <button
+        nbButton
+        size="small"
+        status="info"
+        (click)="onGetDetails(selectedObject)"
+      >
+        XEM VÀ CHỈNH SỬA
       </button>
     </div>
   </div>

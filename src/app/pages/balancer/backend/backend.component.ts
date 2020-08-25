@@ -6,6 +6,7 @@ import {
   getHearder,
   getTitle,
   BACKEND_DB,
+  parseToForm,
 } from "./constants";
 import { getBackend, getHaproxy, getAcl } from "./api";
 import { ACTION_TYPE } from "../../../@share/constants";
@@ -76,6 +77,8 @@ export class BackendComponent implements OnInit {
     this.selectedObject = event;
     this.selected = true;
     console.log(this.selectedObject);
+    const res = parseToForm(this.selectedObject);
+    console.log(res);
   }
 
   async onSearch(event) {
@@ -105,9 +108,7 @@ export class BackendComponent implements OnInit {
       const FORM_ADD = _cloneDeep(FORM_JSON_DEFAULT);
 
       FORM_ADD.components[0].data.values = await getHaproxy();
-      const a = await getAcl();
-      console.log(a);
-      FORM_ADD.components[4].components[4].data.values = a;
+      FORM_ADD.components[4].components[4].data.values = await getAcl();
       const dialogRef = this.dialogService.open(CreateBackendComponent, {
         context: {
           typeAction: ACTION_TYPE.ADD,
@@ -135,42 +136,45 @@ export class BackendComponent implements OnInit {
     }
   }
 
-  // async onGetDetails(item) {
-  //   try {
-  //     if (this.selected) {
-  //       const placeObj = {
-  //         ...item,
-  //         validity: item.validity.value,
-  //       };
-  //       const FORM_UPDATE = _cloneDeep(FORM_JSON_DEFAULT);
-  //       FORM_UPDATE.components[3].hidden = true;
-  //       const dialogRef = this.dialogService.open(CreatePlaceComponent, {
-  //         context: {
-  //           typeAction: ACTION_TYPE.EDIT,
-  //           typeContext: PLACES_DB.FACTORY.TABLE_NAME,
-  //           title: this.arrTitle.DETAILS,
-  //           formio: FORM_UPDATE,
-  //           value: {
-  //             data: placeObj,
-  //           },
-  //         },
-  //       });
-  //       dialogRef.onClose.subscribe(async () => {
-  //         const { total, data } = await getPlace(PLACES_DB.FACTORY.TABLE_NAME, {
-  //           page: this.pageCurrent,
-  //           searchText: this.searchText,
-  //         });
-  //         this.totalRow = total;
-  //         this.rowData = data;
-  //         this.selected = false;
-  //         this.refeshPage = false;
-  //       });
-  //     } else
-  //       this.toastrService.show("Chọn công ty để xem chi tiết", "LỖI", {
-  //         status: "danger",
-  //       });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async onGetDetails(item) {
+    try {
+      if (this.selected) {
+        const backendobj = parseToForm(item);
+        console.log(backendobj);
+        const FORM_UPDATE = _cloneDeep(FORM_JSON_DEFAULT);
+        FORM_UPDATE.components[0].data.values = await getHaproxy();
+        FORM_UPDATE.components[4].components[4].data.values = await getAcl();
+        //FORM_UPDATE.components[3].hidden = true;
+        const dialogRef = this.dialogService.open(CreateBackendComponent, {
+          context: {
+            typeAction: ACTION_TYPE.EDIT,
+            typeContext: BACKEND_DB.BACKEND.TABLE_NAME,
+            title: this.arrTitle.DETAILS,
+            formio: FORM_UPDATE,
+            value: {
+              data: backendobj,
+            },
+          },
+        });
+        dialogRef.onClose.subscribe(async () => {
+          const { total, data } = await getBackend(
+            BACKEND_DB.BACKEND.TABLE_NAME,
+            {
+              page: this.pageCurrent,
+              searchText: this.searchText,
+            }
+          );
+          this.totalRow = total;
+          this.rowData = data;
+          this.selected = false;
+          this.refeshPage = false;
+        });
+      } else
+        this.toastrService.show("Chọn công ty để xem chi tiết", "LỖI", {
+          status: "danger",
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }

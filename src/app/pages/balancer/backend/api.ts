@@ -68,56 +68,27 @@ export async function addBackend(object: any) {
   }
 }
 
-// export async function updatePlace(className: string, object: any) {
-//   try {
-//     const Place = Parse.Object.extend(className);
-//     const placeQuery = new Parse.Query(Place);
-//     const placeItem = await placeQuery.get(object.objectId);
-//     // GET REGIONAL
-//     if (className === PLACES_DB.AREA.TABLE_NAME) {
-//       const factoryPointer = pointerFormat(
-//         PLACES_DB.FACTORY.TABLE_NAME,
-//         object.regional
-//       );
-//       // const Factory = Parse.Object.extend(PLACES_DB.FACTORY.TABLE_NAME);
-//       // const factoryQuery = new Parse.Query(Factory);
-//       // const regionalItem = (await factoryQuery.get(object.regional)).toPointer();
-//       placeItem.set(PLACES_DB.FIELD_NAME.FACTORY, factoryPointer);
-//     }
-//     if (className === PLACES_DB.WORKSHOP.TABLE_NAME) {
-//       const Area = Parse.Object.extend(PLACES_DB.AREA.TABLE_NAME);
-//       const areaQuery = new Parse.Query(Area);
-//       const areaItem = await areaQuery.get(object.regional);
-//       placeItem.set(PLACES_DB.FIELD_NAME.AREA, areaItem.toPointer());
-//       placeItem.set(PLACES_DB.FIELD_NAME.FACTORY, areaItem.toJSON().factory);
-//     }
-//     // UPDATE PLACE
-//     placeItem.set(PLACES_DB.FIELD_NAME.PLACE_ID, object.placeId);
-//     placeItem.set(PLACES_DB.FIELD_NAME.PLACE_NAME, object.placeName);
-//     placeItem.set(PLACES_DB.FIELD_NAME.DESCRIPTION, object.description);
-//     placeItem.set(PLACES_DB.FIELD_NAME.VALIDITY, object.validity);
-//     const result = await placeItem.save();
-//     return result;
-//   } catch (err) {
-//     return err.message;
-//   }
-// }
-
-// export async function getDataRegionalComponent(className: string) {
-//   try {
-//     const Place = Parse.Object.extend(className);
-//     const placeQuery = new Parse.Query(Place);
-//     placeQuery.limit(1000);
-//     const arrPlace = await placeQuery.find();
-//     return arrPlace.map((place) => ({
-//       label: place.toJSON().placeName,
-//       value: place.toJSON().objectId,
-//       placeId: place.toJSON().placeId,
-//     }));
-//   } catch (err) {
-//     return err.message;
-//   }
-// }
+export async function updateBackend(object: any) {
+  try {
+    const backend = Parse.Object.extend("Backend");
+    const backendQuery = new Parse.Query(backend);
+    const backendItem = await backendQuery.get(object.objectId);
+    backendItem.set(BACKEND_DB.FIELD_NAME.BACKEND_NAME, object.name);
+    backendItem.set(BACKEND_DB.FIELD_NAME.HASERVER, object.serverHa);
+    backendItem.set(BACKEND_DB.FIELD_NAME.TIMEOUT, object.timeout);
+    backendItem.set(BACKEND_DB.FIELD_NAME.MODE, object.mode);
+    backendItem.set(BACKEND_DB.FIELD_NAME.BALANCE, object.balance);
+    backendItem.set(BACKEND_DB.FIELD_NAME.OPTION, object.option);
+    backendItem.set(BACKEND_DB.FIELD_NAME.ACL, object.acl);
+    backendItem.set(BACKEND_DB.FIELD_NAME.ACL_CUSTOM, object.aclCustom);
+    backendItem.set(BACKEND_DB.FIELD_NAME.HTTP_REQUEST, object.httpRequest);
+    backendItem.set(BACKEND_DB.FIELD_NAME.SERVER, object.server);
+    const BEitem = await backendItem.save();
+    return BEitem;
+  } catch (err) {
+    return err.message;
+  }
+}
 
 export async function getHaproxy() {
   try {
@@ -131,7 +102,7 @@ export async function getHaproxy() {
       value: ha.toJSON().objectId,
       location: ha.toJSON().location,
     }));
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (err) {
     return err.message;
