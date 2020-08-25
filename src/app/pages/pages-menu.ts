@@ -76,7 +76,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: "ACL",
         icon: "edit-2-outline",
-        link: "/balancer/acl",
+        link: "/pages/balancer/acl",
       },
       {
         title: "Configuration",

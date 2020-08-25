@@ -6,6 +6,7 @@ import { BalancerRoutingModule } from "./balancer-routing.module";
 
 import { BalancerComponent } from "./balancer.component";
 import { BackendComponent } from "./backend/backend.component";
+import { AccessControlListComponent } from './access-control-list/access-control-list.component';
 @NgModule({
   imports: [
     shareModule,
@@ -13,7 +14,7 @@ import { BackendComponent } from "./backend/backend.component";
     ThemeModule,
     BalancerRoutingModule,
   ],
-  declarations: [BalancerComponent, BackendComponent],
+  declarations: [BalancerComponent, BackendComponent, AccessControlListComponent],
   entryComponents: [],
 })
 export class BalancerModule {}

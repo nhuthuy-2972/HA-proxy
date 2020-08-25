@@ -1,9 +1,9 @@
-import {
-  HANDLE_CLICK_BUTTON,
-  PARSE_REQUEST_HEADER,
-} from "../../../@share/constants";
-import { environment } from "../../../../environments/environment";
-import { parse } from "path";
+// import {
+//   HANDLE_CLICK_BUTTON,
+//   PARSE_REQUEST_HEADER,
+// } from "../../../@share/constants";
+// import { environment } from "../../../../environments/environment";
+// import { parse } from "path";
 
 export const FORM_JSON_DEFAULT = {
   components: [
@@ -921,15 +921,15 @@ export function getTitle(title: string) {
   };
 }
 
-export function getHearder(placeTypeName: string) {
+export function getHearder(backendName: string) {
   return [
-    { headerName: `TÊN ${placeTypeName.toUpperCase()}`, field: "name" },
+    { headerName: `TÊN ${backendName.toUpperCase()}`, field: "name" },
     {
       headerName: `HA SERVER`,
       field: `serverHa.name`,
-      width: 150,
-      minWidth: 100,
-      maxWidth: 250,
+      // width: 150,
+      // minWidth: 100,
+      // maxWidth: 250,
     },
     {
       headerName: "Mode",
@@ -937,21 +937,8 @@ export function getHearder(placeTypeName: string) {
     },
     { headerName: "NGÀY TẠO", field: "createdAt" },
     { headerName: "NGÀY CẬP NHẬT", field: "updatedAt" },
-    //{ headerName: "HIỆU LỰC", field: "validity.name" },
   ];
 }
-
-// export const BACKEND_FIELD_FORM = {
-//   HA_SERVER: "haproxyId",
-//   BACKEND_NAME: "backendName",
-//   BALANCE: "balance",
-//   TIMEOUT: "timeout",
-//   TIMEOUT_UNIT: "unitTimeOut",
-//   MODE: "mode",
-//   OPTION_LIST: "optionList",
-//   HTTP_LIST: "httpList",
-//   SERVER_LIST: "serverList",
-// };
 
 export function parseToForm(parseOj: any) {
   return {

@@ -135,10 +135,12 @@ export class CreateBackendComponent implements OnInit, OnDestroy {
           if (this.typeAction == ACTION_TYPE.ADD) {
             const res = await addBackend(be);
             console.log(res);
+            this.dialogRef.close();
           } else {
             // be["ojectId"] = data.objectId;
             const res = await updateBackend(be);
             console.log(res);
+            this.dialogRef.close();
           }
         }
       } catch (err) {
