@@ -8,7 +8,7 @@ import {
   BACKEND_DB,
   parseToForm,
 } from "./constants";
-import { getBackend, getHaproxy, getAcl } from "./api";
+import { getBackend, getHaproxy, getAcl, deleteBackend } from "./api";
 import { ACTION_TYPE } from "../../../@share/constants";
 import _cloneDeep from "lodash/cloneDeep";
 import { dateTimeFormat } from "../../../@share/dateTimeFormat";
@@ -144,6 +144,8 @@ export class BackendComponent implements OnInit {
         const FORM_UPDATE = _cloneDeep(FORM_JSON_DEFAULT);
         FORM_UPDATE.components[0].data.values = await getHaproxy();
         FORM_UPDATE.components[4].components[4].data.values = await getAcl();
+        FORM_UPDATE.components[6].theme = "warning";
+        FORM_UPDATE.components[6].label = "LUU THAY DOI";
         //FORM_UPDATE.components[3].hidden = true;
         const dialogRef = this.dialogService.open(CreateBackendComponent, {
           context: {
@@ -169,6 +171,35 @@ export class BackendComponent implements OnInit {
           this.selected = false;
           this.refeshPage = false;
         });
+      } else
+        this.toastrService.show("Chọn công ty để xem chi tiết", "LỖI", {
+          status: "danger",
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async deleteRow(item) {
+    try {
+      if (this.selected) {
+        const aclObj = {
+          ...item,
+        };
+        console.log(aclObj);
+        const res = await deleteBackend(aclObj);
+        console.log(res);
+        const { total, data } = await getBackend(
+          BACKEND_DB.BACKEND.TABLE_NAME,
+          {
+            page: this.pageCurrent,
+            searchText: this.searchText,
+          }
+        );
+        this.totalRow = total;
+        this.rowData = data;
+        this.selected = false;
+        this.refeshPage = false;
       } else
         this.toastrService.show("Chọn công ty để xem chi tiết", "LỖI", {
           status: "danger",

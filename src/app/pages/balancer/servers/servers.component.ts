@@ -1,20 +1,25 @@
 import { Component, ViewEncapsulation, OnInit } from "@angular/core";
 import { NbDialogService, NbToastrService } from "@nebular/theme";
-import { CreateAclComponent } from "../create-acl/create-acl.component";
-import { FORM_JSON_DEFAULT, ACL_DB, getHearder, getTitle } from "./constants";
-import { getACL, deleteACL } from "./api";
+import { CreateServerComponent } from "../create-server/create-server.component";
+import {
+  FORM_JSON_DEFAULT,
+  SERVER_DB,
+  getHearder,
+  getTitle,
+} from "./constants";
+import { getServer, deleteServer } from "./api";
 import { ACTION_TYPE } from "../../../@share/constants";
 import _cloneDeep from "lodash/cloneDeep";
 import { dateTimeFormat } from "../../../@share/dateTimeFormat";
 import { get } from "https";
 
 @Component({
-  selector: "ngx-access-control-list",
-  templateUrl: "./access-control-list.component.html",
-  styleUrls: ["./access-control-list.component.scss"],
+  selector: "ngx-servers",
+  templateUrl: "./servers.component.html",
+  styleUrls: ["./servers.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class AccessControlListComponent implements OnInit {
+export class ServersComponent implements OnInit {
   public rowData: any[];
   public columnHeader: any[];
   public selected: boolean;
@@ -33,14 +38,14 @@ export class AccessControlListComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.columnHeader = getHearder(ACL_DB.ACL.TITLE);
+    this.columnHeader = getHearder(SERVER_DB.SERVER.TITLE);
     console.log(this.columnHeader);
-    this.arrTitle = getTitle(ACL_DB.ACL.TITLE);
+    this.arrTitle = getTitle(SERVER_DB.SERVER.TITLE);
     this.selected = false;
     this.searchText = "";
     this.perPage = 10;
     this.pageCurrent = 1;
-    const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+    const { total, data } = await getServer(SERVER_DB.SERVER.TABLE_NAME, {
       searchText: this.searchText,
     });
     console.log("Data :", data);
@@ -52,7 +57,7 @@ export class AccessControlListComponent implements OnInit {
   async onChangePage(page) {
     console.log(page);
     try {
-      const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+      const { total, data } = await getServer(SERVER_DB.SERVER.TABLE_NAME, {
         page,
         searchText: this.searchText,
       });
@@ -78,7 +83,7 @@ export class AccessControlListComponent implements OnInit {
       const { key, keyCode } = event;
       if (key === "Enter" || keyCode === 13) {
         this.searchText = event.target.value;
-        const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+        const { total, data } = await getServer(SERVER_DB.SERVER.TABLE_NAME, {
           searchText: this.searchText,
         });
         this.totalRow = total;
@@ -95,7 +100,7 @@ export class AccessControlListComponent implements OnInit {
   async onAddNewDataSetTap() {
     try {
       const FORM_ADD = _cloneDeep(FORM_JSON_DEFAULT);
-      const dialogRef = this.dialogService.open(CreateAclComponent, {
+      const dialogRef = this.dialogService.open(CreateServerComponent, {
         context: {
           typeAction: ACTION_TYPE.ADD,
           // typeContext: BACKEND_DB.BACKEND.TABLE_NAME,
@@ -104,7 +109,7 @@ export class AccessControlListComponent implements OnInit {
         },
       });
       dialogRef.onClose.subscribe(async () => {
-        const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+        const { total, data } = await getServer(SERVER_DB.SERVER.TABLE_NAME, {
           page: this.pageCurrent,
           searchText: this.searchText,
         });
@@ -122,23 +127,23 @@ export class AccessControlListComponent implements OnInit {
   async onGetDetails(item) {
     try {
       if (this.selected) {
-        const aclObj = {
+        const serverObj = {
           ...item,
         };
-        console.log(aclObj);
+        console.log(serverObj);
         const FORM_UPDATE = _cloneDeep(FORM_JSON_DEFAULT);
-        const dialogRef = this.dialogService.open(CreateAclComponent, {
+        const dialogRef = this.dialogService.open(CreateServerComponent, {
           context: {
             typeAction: ACTION_TYPE.EDIT,
             title: this.arrTitle.DETAILS,
             formio: FORM_UPDATE,
             value: {
-              data: aclObj,
+              data: serverObj,
             },
           },
         });
         dialogRef.onClose.subscribe(async () => {
-          const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+          const { total, data } = await getServer(SERVER_DB.SERVER.TABLE_NAME, {
             page: this.pageCurrent,
             searchText: this.searchText,
           });
@@ -159,13 +164,13 @@ export class AccessControlListComponent implements OnInit {
   async deleteRow(item) {
     try {
       if (this.selected) {
-        const aclObj = {
+        const serverObj = {
           ...item,
         };
-        console.log(aclObj);
-        const res = await deleteACL(aclObj);
+        console.log(serverObj);
+        const res = await deleteServer(serverObj);
         console.log(res);
-        const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+        const { total, data } = await getServer(SERVER_DB.SERVER.TABLE_NAME, {
           page: this.pageCurrent,
           searchText: this.searchText,
         });

@@ -2,8 +2,11 @@ import { Component, OnDestroy, ViewEncapsulation, OnInit } from "@angular/core";
 import { NbDialogRef, NbToastrService } from "@nebular/theme";
 import { ACTION_TYPE, HANDLE_CLICK_BUTTON } from "../../../@share/constants";
 import _isEmpty from "lodash/isEmpty";
-import { addBackend, updateBackend } from "../../balancer/backend/api";
-// import { addPlace, updatePlace } from "../backend/api";
+import {
+  addBackend,
+  updateBackend,
+  deleteBackend,
+} from "../../balancer/backend/api";
 
 @Component({
   selector: "createBackend",
@@ -49,35 +52,26 @@ export class CreateBackendComponent implements OnInit, OnDestroy {
               let contain: boolean = true;
               if (http.condition == "if" || http.condition == "unless") {
                 for (let it of acls) {
-                  if (it.acl.objectId == http.acl.objectId) {
+                  if (it.objectId == http.acl.objectId) {
                     contain = false;
                     break;
                   }
                 }
                 if (contain) {
                   acls.push({
-                    acl: {
-                      __type: "Pointer",
-                      className: "ACLs",
-                      objectId: http.acl.objectId,
-                    },
+                    __type: "Pointer",
+                    className: "ACLs",
+                    objectId: http.acl.objectId,
                   });
                 }
-                // let httpobj = {
-                //   value:
-                //     http.value + " " + http.condition + " " + http.acl.name,
-                //   aclID: http.acl.objectId,
-                //   option: http.ruleOption,
-                // };
+                if (http.customAcl) {
+                  if (_isEmpty(http.customAcl)) {
+                    delete http.customAcl;
+                  }
+                }
                 httpL.push(http);
               } else {
                 let ac = http.customAcl.trim();
-
-                // let httpobj = {
-                //   value: http.value,
-                //   option: http.ruleOption,
-                // };
-
                 if (!_isEmpty(http.customAcl)) {
                   //httpobj["aclc"] = ac;
                   for (let it of aclcs) {
@@ -91,27 +85,13 @@ export class CreateBackendComponent implements OnInit, OnDestroy {
                       customAcl: ac,
                     });
                   }
+                } else {
+                  delete http.customAcl;
                 }
-
                 httpL.push(http);
               }
             }
           }
-
-          // if (data.serverList.length > 0) {
-          //   data.serverList.forEach((s) => {
-          //     serverL.push({
-          //       name: s.serverName,
-          //       value: s.serverValue,
-          //     });
-          //   });
-          // }
-
-          // for (let op of data.optionList) {
-          //   if (!_isEmpty(op.optionName)) {
-          //     optionl.push(op.optionName);
-          //   }
-          // }
           const be = {
             name: data.backendName,
             serverHa: {
@@ -120,7 +100,7 @@ export class CreateBackendComponent implements OnInit, OnDestroy {
               objectId: data.haproxyId,
             },
             timeout: data.timeout
-              ? { value: "server " + data.timeout, unit: data.unitTimeOut }
+              ? { type: "server", time: data.timeout, unit: data.unitTimeOut }
               : null,
             mode: data.mode ? data.mode : null,
             balance: data.balance ? data.balance : null,
@@ -132,11 +112,11 @@ export class CreateBackendComponent implements OnInit, OnDestroy {
             objectId: data.objectId ? data.objectId : null,
           };
           console.log(be);
-          if (this.typeAction == ACTION_TYPE.ADD) {
+          if (this.typeAction === ACTION_TYPE.ADD) {
             const res = await addBackend(be);
             console.log(res);
             this.dialogRef.close();
-          } else {
+          } else if (this.typeAction === ACTION_TYPE.EDIT) {
             // be["ojectId"] = data.objectId;
             const res = await updateBackend(be);
             console.log(res);
@@ -148,31 +128,6 @@ export class CreateBackendComponent implements OnInit, OnDestroy {
         this.toastrService.show(err, "LỖI", { status: "danger" });
       }
     }
-
-    // if (this.typeAction === ACTION_TYPE.EDIT) {
-    //   try {
-    //     if (
-    //       type === HANDLE_CLICK_BUTTON.ON_DISABLE.event ||
-    //       type === HANDLE_CLICK_BUTTON.ON_SAVE.event
-    //     ) {
-    //       console.log("Click save edit");
-    //       // const placeObj = {
-    //       //     objectId: data.objectId,
-    //       //     placeId: data.placeId,
-    //       //     placeName: data.placeName,
-    //       //     description: data.description,
-    //       //     regional: data.regional,
-    //       //     validity: type === HANDLE_CLICK_BUTTON.ON_DISABLE.event ? false : data.validity.value,
-    //       // };
-    //       // const result = await updatePlace(this.typeContext, placeObj);
-    //       // if (result.id) {
-    //       //     this.dialogRef.close();
-    //       // } else this.toastrService.show(result, "LỖI", { status: "danger" });
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
   }
 
   ngOnDestroy() {

@@ -16,18 +16,16 @@ export async function getBackend(className: string, query: any) {
       backendQuery.matches(BACKEND_DB.FIELD_NAME.BACKEND_NAME, searchText, "i");
     }
 
-    const ha = await getHaproxy();
-    console.log(ha);
-    const acl = await getAcl();
-    console.log(acl);
+    // const ha = await getHaproxy();
+    // console.log(ha);
+    // const acl = await getAcl();
+    // console.log(acl);
     backendQuery
       .limit(perPage)
       .skip(skipNumber)
       .descending(BACKEND_DB.FIELD_NAME.CREATED_AT);
     const total = await backendQuery.count();
-    const arrBackend = await backendQuery
-      .include(["serverHa", "acl.acl"])
-      .find();
+    const arrBackend = await backendQuery.include(["serverHa", "acl"]).find();
     return {
       total,
       data: arrBackend.map((backend) => {
@@ -119,6 +117,18 @@ export async function getAcl() {
       //label: acl.toJSON().name,
       value: { objectId: acl.toJSON().objectId, name: acl.toJSON().name },
     }));
+  } catch (err) {
+    return err.message;
+  }
+}
+
+export async function deleteBackend(object: any) {
+  try {
+    const backend = Parse.Object.extend("Backend");
+    const backendQuery = new Parse.Query(backend);
+    const backendItem = await backendQuery.get(object.objectId);
+    const backendparse = await backendItem.destroy();
+    return backendparse;
   } catch (err) {
     return err.message;
   }

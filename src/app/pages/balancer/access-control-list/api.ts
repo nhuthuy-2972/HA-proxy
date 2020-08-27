@@ -5,7 +5,7 @@ import { pointerFormat } from "../../../@share/formatTypeData";
 import { async } from "@angular/core/testing";
 import { ActivatedRoute } from "@angular/router";
 
-export async function getACl(className: string, query: any) {
+export async function getACL(className: string, query: any) {
   try {
     const page = query.page ? query.page : 1;
     const { perPage = 10, searchText } = query;
@@ -39,47 +39,45 @@ export async function getACl(className: string, query: any) {
   }
 }
 
-// export async function addBackend(object: any) {
-//   try {
-//     const Backend = Parse.Object.extend("Backend");
-//     const BackendObj = new Backend();
+export async function addACL(object: any) {
+  try {
+    const acl = Parse.Object.extend("ACLs");
+    const aclObj = new acl();
 
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.BACKEND_NAME, object.name);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.HASERVER, object.serverHa);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.TIMEOUT, object.timeout);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.MODE, object.mode);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.BALANCE, object.balance);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.OPTION, object.option);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.ACL, object.acl);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.ACL_CUSTOM, object.aclCustom);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.HTTP_REQUEST, object.httpRequest);
-//     BackendObj.set(BACKEND_DB.FIELD_NAME.SERVER, object.server);
+    aclObj.set(ACL_DB.FIELD_NAME.ACL_NAME, object.name);
+    aclObj.set(ACL_DB.FIELD_NAME.CRITERION, object.criterion);
+    aclObj.set(ACL_DB.FIELD_NAME.CONDITON, object.conditions);
 
-//     const BEitem = await BackendObj.save();
-//     return BEitem;
-//   } catch (err) {
-//     return err.message;
-//   }
-// }
+    const aclitem = await aclObj.save();
+    return aclitem;
+  } catch (err) {
+    return err.message;
+  }
+}
 
-// export async function updateBackend(object: any) {
-//   try {
-//     const backend = Parse.Object.extend("Backend");
-//     const backendQuery = new Parse.Query(backend);
-//     const backendItem = await backendQuery.get(object.objectId);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.BACKEND_NAME, object.name);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.HASERVER, object.serverHa);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.TIMEOUT, object.timeout);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.MODE, object.mode);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.BALANCE, object.balance);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.OPTION, object.option);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.ACL, object.acl);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.ACL_CUSTOM, object.aclCustom);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.HTTP_REQUEST, object.httpRequest);
-//     backendItem.set(BACKEND_DB.FIELD_NAME.SERVER, object.server);
-//     const BEitem = await backendItem.save();
-//     return BEitem;
-//   } catch (err) {
-//     return err.message;
-//   }
-// }
+export async function updateACL(object: any) {
+  try {
+    const acl = Parse.Object.extend("ACLs");
+    const aclQuery = new Parse.Query(acl);
+    const aclItem = await aclQuery.get(object.objectId);
+    aclItem.set(ACL_DB.FIELD_NAME.ACL_NAME, object.name);
+    aclItem.set(ACL_DB.FIELD_NAME.CRITERION, object.criterion);
+    aclItem.set(ACL_DB.FIELD_NAME.CONDITON, object.conditions);
+    const aclparse = await aclItem.save();
+    return aclparse;
+  } catch (err) {
+    return err.message;
+  }
+}
+
+export async function deleteACL(object: any) {
+  try {
+    const acl = Parse.Object.extend("ACLs");
+    const aclQuery = new Parse.Query(acl);
+    const aclItem = await aclQuery.get(object.objectId);
+    const aclparse = await aclItem.destroy();
+    return aclparse;
+  } catch (err) {
+    return err.message;
+  }
+}

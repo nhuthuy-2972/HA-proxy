@@ -1,0 +1,18 @@
+<nb-card style="width: 400px;">
+  <nb-card-header class="form-action">
+    <span>{{ title }}</span>
+    <button nbButton ghost size="small" (click)="onClose()">
+      <nb-icon icon="close-outline"></nb-icon>
+    </button>
+  </nb-card-header>
+  <nb-card-body style="max-height: 800px;">
+    <div>
+      <formio
+        class="w-100"
+        [form]="formio"
+        [submission]="value"
+        (customEvent)="handleEvent($event)"
+      ></formio>
+    </div>
+  </nb-card-body>
+</nb-card>

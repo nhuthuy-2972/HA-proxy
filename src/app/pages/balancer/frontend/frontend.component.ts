@@ -1,20 +1,31 @@
 import { Component, ViewEncapsulation, OnInit } from "@angular/core";
 import { NbDialogService, NbToastrService } from "@nebular/theme";
-import { CreateAclComponent } from "../create-acl/create-acl.component";
-import { FORM_JSON_DEFAULT, ACL_DB, getHearder, getTitle } from "./constants";
-import { getACL, deleteACL } from "./api";
+import { CreateFrontendComponent } from "../create-frontend/create-frontend.component";
+import {
+  FORM_JSON_DEFAULT,
+  getHearder,
+  getTitle,
+  FRONTEND_DB,
+  parseToForm,
+} from "./constants";
+import {
+  getFrontend,
+  getAcl,
+  getHaproxy,
+  getbackendNames,
+  deleteFrontend,
+} from "./api";
 import { ACTION_TYPE } from "../../../@share/constants";
 import _cloneDeep from "lodash/cloneDeep";
 import { dateTimeFormat } from "../../../@share/dateTimeFormat";
-import { get } from "https";
 
 @Component({
-  selector: "ngx-access-control-list",
-  templateUrl: "./access-control-list.component.html",
-  styleUrls: ["./access-control-list.component.scss"],
+  selector: "ngx-frontend",
+  templateUrl: "./frontend.component.html",
+  styleUrls: ["./frontend.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
-export class AccessControlListComponent implements OnInit {
+export class FrontendComponent implements OnInit {
   public rowData: any[];
   public columnHeader: any[];
   public selected: boolean;
@@ -33,14 +44,14 @@ export class AccessControlListComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.columnHeader = getHearder(ACL_DB.ACL.TITLE);
+    this.columnHeader = getHearder(FRONTEND_DB.FRONTEND.TITLE);
     console.log(this.columnHeader);
-    this.arrTitle = getTitle(ACL_DB.ACL.TITLE);
+    this.arrTitle = getTitle(FRONTEND_DB.FRONTEND.TITLE);
     this.selected = false;
     this.searchText = "";
     this.perPage = 10;
     this.pageCurrent = 1;
-    const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
+    const { total, data } = await getFrontend(FRONTEND_DB.FRONTEND.TABLE_NAME, {
       searchText: this.searchText,
     });
     console.log("Data :", data);
@@ -52,10 +63,13 @@ export class AccessControlListComponent implements OnInit {
   async onChangePage(page) {
     console.log(page);
     try {
-      const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
-        page,
-        searchText: this.searchText,
-      });
+      const { total, data } = await getFrontend(
+        FRONTEND_DB.FRONTEND.TABLE_NAME,
+        {
+          page,
+          searchText: this.searchText,
+        }
+      );
       console.log(data);
       this.totalRow = total;
       this.rowData = data;
@@ -78,9 +92,12 @@ export class AccessControlListComponent implements OnInit {
       const { key, keyCode } = event;
       if (key === "Enter" || keyCode === 13) {
         this.searchText = event.target.value;
-        const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
-          searchText: this.searchText,
-        });
+        const { total, data } = await getFrontend(
+          FRONTEND_DB.FRONTEND.TABLE_NAME,
+          {
+            searchText: this.searchText,
+          }
+        );
         this.totalRow = total;
         this.rowData = data;
         this.selected = false;
@@ -95,19 +112,27 @@ export class AccessControlListComponent implements OnInit {
   async onAddNewDataSetTap() {
     try {
       const FORM_ADD = _cloneDeep(FORM_JSON_DEFAULT);
-      const dialogRef = this.dialogService.open(CreateAclComponent, {
+      FORM_ADD.components[0].data.values = await getHaproxy();
+      const acls = await getAcl();
+      FORM_ADD.components[2].components[4].data.values = acls;
+      FORM_ADD.components[3].components[0].data.values = await getbackendNames();
+      FORM_ADD.components[3].components[3].data.values = acls;
+      const dialogRef = this.dialogService.open(CreateFrontendComponent, {
         context: {
           typeAction: ACTION_TYPE.ADD,
-          // typeContext: BACKEND_DB.BACKEND.TABLE_NAME,
+          // typeContext: FRONTEND_DB.BACKEND.TABLE_NAME,
           title: this.arrTitle.ADD,
           formio: FORM_ADD,
         },
       });
       dialogRef.onClose.subscribe(async () => {
-        const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
-          page: this.pageCurrent,
-          searchText: this.searchText,
-        });
+        const { total, data } = await getFrontend(
+          FRONTEND_DB.FRONTEND.TABLE_NAME,
+          {
+            page: this.pageCurrent,
+            searchText: this.searchText,
+          }
+        );
         this.totalRow = total;
         this.rowData = data;
         this.selected = false;
@@ -122,26 +147,37 @@ export class AccessControlListComponent implements OnInit {
   async onGetDetails(item) {
     try {
       if (this.selected) {
-        const aclObj = {
-          ...item,
-        };
-        console.log(aclObj);
+        const frontendobj = parseToForm(item);
+        console.log(frontendobj);
         const FORM_UPDATE = _cloneDeep(FORM_JSON_DEFAULT);
-        const dialogRef = this.dialogService.open(CreateAclComponent, {
+        FORM_UPDATE.components[0].data.values = await getHaproxy();
+        const acls = await getAcl();
+        FORM_UPDATE.components[2].components[4].data.values = acls;
+        FORM_UPDATE.components[3].components[0].data.values = await getbackendNames();
+        FORM_UPDATE.components[3].components[3].data.values = acls;
+
+        FORM_UPDATE.components[4].theme = "warning";
+        FORM_UPDATE.components[4].label = "LUU THAY DOI";
+        //FORM_UPDATE.components[3].hidden = true;
+        const dialogRef = this.dialogService.open(CreateFrontendComponent, {
           context: {
             typeAction: ACTION_TYPE.EDIT,
+            typeContext: FRONTEND_DB.FRONTEND.TABLE_NAME,
             title: this.arrTitle.DETAILS,
             formio: FORM_UPDATE,
             value: {
-              data: aclObj,
+              data: frontendobj,
             },
           },
         });
         dialogRef.onClose.subscribe(async () => {
-          const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
-            page: this.pageCurrent,
-            searchText: this.searchText,
-          });
+          const { total, data } = await getFrontend(
+            FRONTEND_DB.FRONTEND.TABLE_NAME,
+            {
+              page: this.pageCurrent,
+              searchText: this.searchText,
+            }
+          );
           this.totalRow = total;
           this.rowData = data;
           this.selected = false;
@@ -163,12 +199,15 @@ export class AccessControlListComponent implements OnInit {
           ...item,
         };
         console.log(aclObj);
-        const res = await deleteACL(aclObj);
+        const res = await deleteFrontend(aclObj);
         console.log(res);
-        const { total, data } = await getACL(ACL_DB.ACL.TABLE_NAME, {
-          page: this.pageCurrent,
-          searchText: this.searchText,
-        });
+        const { total, data } = await getFrontend(
+          FRONTEND_DB.FRONTEND.TABLE_NAME,
+          {
+            page: this.pageCurrent,
+            searchText: this.searchText,
+          }
+        );
         this.totalRow = total;
         this.rowData = data;
         this.selected = false;

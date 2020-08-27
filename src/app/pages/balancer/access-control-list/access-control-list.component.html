@@ -11,7 +11,7 @@
         fieldSize="small"
         status="basic"
         type="text"
-        placeholder="Tìm theo tên backend..."
+        placeholder="Tìm theo tên acl..."
         (keydown.enter)="onSearch($event)"
       />
     </div>
@@ -45,6 +45,16 @@
         (click)="onGetDetails(selectedObject)"
       >
         XEM VÀ CHỈNH SỬA
+      </button>
+    </div>
+    <div *ngIf="selected" class="button-container">
+      <button
+        status="danger"
+        nbButton
+        size="small"
+        (click)="deleteRow(selectedObject)"
+      >
+        XÓA
       </button>
     </div>
   </div>

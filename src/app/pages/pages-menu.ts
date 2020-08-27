@@ -64,14 +64,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/balancer/groups",
       },
       {
+        title: "Proxy Server",
+        icon: "shuffle-2-outline",
+        link: "/pages/balancer/servers",
+      },
+      {
         title: "Frontends",
         icon: "log-in-outline",
-        link: "/balancer/frontends",
+        link: "/pages/balancer/frontends",
       },
       {
         title: "Backends",
         icon: "log-out-outline",
-        link: "/pages/balancer/backend",
+        link: "/pages/balancer/backends",
       },
       {
         title: "ACL",
